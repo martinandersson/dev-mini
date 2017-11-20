@@ -194,8 +194,8 @@ If not `nil`, then it must be a 2-letter country code that specifies a keyboard
 layout. For example, set to "se" for Swedish or "de" for German. For more
 information, click [here][19].
 
-If `nil`, then our provisioning applies not sorcery and keyboard layout will be
-whatever the OS wants him to be; "for most platforms" this is "us"
+If `nil`, then our provisioning applies no sorcery and the keyboard layout will
+be whatever the OS wants him to be; "for most platforms" this is "us"
 ([source][20]).
 
 This configuration value applies to the master node only. It is expected that
@@ -211,9 +211,9 @@ the OS such as opening up a terminal! Don't ask me why. Maybe it's a feature.
 
 ### `install_ansible_roles`
 
-If `true`, will automagically install Ansible roles declared in
+If `true`, will automagically install Ansible roles defined in
 `./provisioning/requirements.yml` on the last machine before having the same
-machine run all plays declared in `./provisioning/playbook.yml`. By default, the
+machine run all plays defined in `./provisioning/playbook.yml`. By default, the
 value is `false`.
 
 This flag is currently needed to avoid passing the `ansible-galaxy` command an
@@ -275,4 +275,6 @@ Copy paste whatever you want.
 
 ## Contact
 
-martinandersson.com/contact
+[martinandersson.com/contact][28]
+
+[28]: http://www.martinandersson.com/contact/
