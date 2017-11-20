@@ -33,7 +33,7 @@ Ansible is **not** required to be installed on your host machine. See
 
 [2]: https://www.vagrantup.com/downloads.html
 [3]: https://www.virtualbox.org/wiki/Downloads
-[4]: #machine-provisioning-with-Ansible
+[4]: #machine-provisioning-with-ansible
 
 ## Configuration
 
