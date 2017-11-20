@@ -15,7 +15,7 @@ Initial release.
 
 ### Added
 
-- `./READNME.md`
+- `./README.md`
 - `./Vagrantfile`
 - `./provisioning/playbook.yml`
 - `./provisioning/requirements.yml`
