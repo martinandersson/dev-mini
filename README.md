@@ -48,7 +48,7 @@ form of an array of strings. Defaults to `['my-ubuntu']`, i.e., 1 machine.
 
 A machine name should not contain any whitespace.
 
-The name is used in a lot of places..
+The name is used as..
 
 1. hostname (you may use the name instead of an IP address when communicating
    between guest machines)
