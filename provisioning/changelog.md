@@ -12,7 +12,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 ## [1.0.1] - 2017-11-19
 
 - Fixed a bad variable reference which would crash the auto-installation of
-  dependent plugins.
+  dependent Vagrant plugins.
 
 ## 1.0.0 - 2017-11-19 [YANKED]
 
