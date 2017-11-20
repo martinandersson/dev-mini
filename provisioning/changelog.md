@@ -9,7 +9,12 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 - Nothing, yet.
 
-## 1.0.0 - 2017-11-19
+## [1.0.1] - 2017-11-19
+
+- Fixed a bad variable reference which would crash the auto-installation of
+  dependent plugins.
+
+## 1.0.0 - 2017-11-19 [YANKED]
 
 Initial release.
 
@@ -23,4 +28,5 @@ Initial release.
 - `./provisioning/box-failures.md`
 - `./provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.0...v1.0.1
