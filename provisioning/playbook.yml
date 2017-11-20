@@ -1,0 +1,39 @@
+---
+- name: Provision all
+  hosts: all
+  become: yes
+  tasks:
+  - name: Update apt's repository indices
+    # Equivalent to 'apt-get update'.
+    # https://askubuntu.com/a/222352
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600  # ..seconds = 1 hour
+    when: ansible_distribution in ['Ubuntu', 'Debian']
+
+
+- name: Provision master
+  hosts: master
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Set keyboard layout
+    # https://askubuntu.com/a/911748
+    lineinfile:
+      dest: /etc/default/keyboard
+      regexp: ^XKBLAYOUT
+      line: XKBLAYOUT="{{ keyboard_layout }}"
+    when: keyboard_layout is defined
+    notify: propose-restart
+  handlers:
+  - name: Notify human
+    debug: msg="Changes made that require a restart, but we won't do it. You do it!"
+    listen: propose-restart
+
+
+- name: Provision slaves
+  hosts: slaves
+  gather_facts: no
+  tasks:
+  - name: Be helpful
+    debug: msg="Here is where you can add provisioning stuff for slaves :)"
