@@ -22,10 +22,10 @@ CONFIGURATION = {
 
 
 ['vagrant-vbguest', 'vagrant-hostmanager'].reject{|p| Vagrant.has_plugin? p}.each do |p|
-  if system "vagrant plugin install #{plugin}"
+  if system "vagrant plugin install #{p}"
     exec 'vagrant ' + (ARGV.join ' ')
   else
-    abort %Q.Failed to install "#{plugin}" plugin :'(.
+    abort %Q.Failed to install "#{p}" plugin :'(.
   end
 end
 
