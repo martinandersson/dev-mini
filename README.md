@@ -1,16 +1,16 @@
 # A minimal development environment
 
 This project represents a virtual bare-bones development environment, ready to
-be raped with new software. Have all the dependencies installed, then do
+be raped with new software. Have all the [dependencies][0] installed, then do
 `vagrant up`.
 
-One or many machines may easily be set up thru editing configuration variables
-at the top in `./Vagrantfile`. See the [`machine_names` configuration][1] for
-more info.
+One or many machines may easily be set up thru editing configuration values at
+the top in `./Vagrantfile`. See the [`machine_names` configuration][1] for more
+info.
 
 Batteries included:
 
-- Latest Ubuntu (`17.10`) and CentOS (`7.4.1708`)
+- Latest Ubuntu (`17.10`) with a desktop and headless CentOS (`7.4.1708`)
 - Admin user/password: vagrant/vagrant
 - Static IPs on a private network: `192.168.60.10` .. `.11` ..
 - Ansible plumbing to facilitate machine provisioning
@@ -19,6 +19,7 @@ Batteries included:
 Used as a template by a Windows-addicted developer as a quick way to bring about
 new development environments whether they be single- or multi-machine.
 
+[0]: #dependencies
 [1]: #machine_names
 
 ## Dependencies
