@@ -1,5 +1,12 @@
 # Boxes' hall of shame
 
+## 2017-12-13
+
+Using `Windows 10`, `Vagrant 2.0.1`, `VirtualBox 5.2.2` with `Extensions Pack
+5.2.2` and `vagrant-vbguest 0.15.0`.
+
+- `trueability/elementaryos-0.4`: Fail to mount synced dir, plus the box is badly setup.
+
 ## 2017-11-19
 
 Using `Windows 10`, `Vagrant 2.0.1`, `VirtualBox 5.2.0` with `Extensions Pack
