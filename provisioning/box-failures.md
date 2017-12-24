@@ -1,5 +1,10 @@
 # Boxes' hall of shame
 
+Briefly documents failures of Vagrant boxes.
+
+In honesty, it's my impression that only a minority of all Vagrant boxes
+actually work.
+
 ## 2017-12-13
 
 Using `Windows 10`, `Vagrant 2.0.1`, `VirtualBox 5.2.2` with `Extensions Pack
