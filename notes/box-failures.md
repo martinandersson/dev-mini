@@ -2,7 +2,7 @@
 
 Briefly documents failures of Vagrant boxes.
 
-In honesty, it's my impression that only a minority of all Vagrant boxes
+In all honesty, it's my impression that only a minority of all Vagrant boxes
 actually work.
 
 ## 2017-12-13
