@@ -266,9 +266,9 @@ controller but you must do two things! First, put 'em in
 
 ## Change log
 
-See [`./provisioning/changelog.md`][27].
+See [`./CHANGELOG.md`][27].
 
-[27]: https://github.com/martinanderssondotcom/mini-dev/blob/master/provisioning/changelog.md
+[27]: https://github.com/martinanderssondotcom/mini-dev/blob/master/CHANGELOG.md
 
 ## License
 
