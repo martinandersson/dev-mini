@@ -7,7 +7,9 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [Unreleased]
 
-- Nothing, yet.
+### Changed
+
+- Moved notes to its own directory `./notes`.
 
 ## [1.0.1] - 2017-11-19
 
