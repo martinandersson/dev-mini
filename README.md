@@ -10,7 +10,7 @@ info.
 
 Batteries included:
 
-- `Ubuntu Budgie 17.10 x64` as primary OS and headless `CentOS 7` as secondary
+- `Ubuntu Budgie 17.10 x64` as primary OS and headless `CentOS 7` as secondary OS
 - Username and password: `vagrant`
 - Static IPs on a private network: `192.168.60.10` .. `.11` ..
 - Ansible plumbing to facilitate machine provisioning
