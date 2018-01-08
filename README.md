@@ -18,7 +18,11 @@ Batteries included:
 
 This project is used as a template by a Windows-addicted developer as a quick
 way to bring about new development environments whether they be single- or
-multi-machine setups.
+multi-machine setups. It was conceived because the Vagrantfile produced by
+`vagrant init` is *never* enough and eventually I got tired of copy-pasting an
+ever-expanding Vagrantfile across my projects. I reached a point where it was
+evident that the Vagrantfile itself was 1) extremely useful and 2) will benefit
+from all the tooling that Git and GitHub provides.
 
 [0]: #dependencies
 [1]: #machine_names
