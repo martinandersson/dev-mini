@@ -16,7 +16,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 ### Changed
 
 - Fixed a bad variable reference which would crash the auto-installation of
-  dependent Vagrant plugins.
+  Vagrant plugins' dependencies.
 
 ## 1.0.0 - 2017-11-19 [YANKED]
 
