@@ -10,14 +10,15 @@ info.
 
 Batteries included:
 
-- Latest Ubuntu (`17.10`) with a desktop and headless CentOS (`7.4.1708`)
-- Admin user/password: vagrant/vagrant
+- `Ubuntu Budgie 17.10 x64` as primary OS and headless `CentOS 7` as secondary
+- Username and password: `vagrant`
 - Static IPs on a private network: `192.168.60.10` .. `.11` ..
 - Ansible plumbing to facilitate machine provisioning
 - **That's it!**
 
-Used as a template by a Windows-addicted developer as a quick way to bring about
-new development environments whether they be single- or multi-machine.
+This project is used as a template by a Windows-addicted developer as a quick
+way to bring about new development environments whether they be single- or
+multi-machine setups.
 
 [0]: #dependencies
 [1]: #machine_names
@@ -107,7 +108,7 @@ unlike slave machines which have no desktop and try to use as little computing
 resources as possible.
 
 However, set `master_acts_as_slave` to `true` and all of the master-specific
-configuration will stop to apply. Instead, the first machine will be configured
+configuration will cease to apply. Instead, the first machine will be configured
 just like a slave.
 
 As an example, maybe your host machine already have a bunch of IDEs and build
@@ -120,22 +121,17 @@ bunch of fictitious machines to act as a Docker Swarm for deployment:
 ### `master_box`
 
 Determines which box the master node uses. By default, this is
-[`'fso/artful64-desktop'`][6].
+[`'pristine/ubuntu-budgie-17-x64'`][6].
 
 Value is either the name of an installed box or the shorthand name of a box in
 [Vagrant's cloud][7].
-
-"artful64" is a reference to 64-bit Ubuntu 17.10. For a translation between
-weird-ass ninja-encrypted "code names" and something so simple as a no-nonsense
-version number, see [this link][8].
 
 This configuration does not apply if [`master_acts_as_slave`][5] is set to
 `true` in which case the first machine will get whatever [`slave_box`][9]
 defines.
 
-[6]: https://app.vagrantup.com/fso/boxes/artful64-desktop
+[6]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-17-x64
 [7]: https://app.vagrantup.com/boxes/search
-[8]: https://wiki.ubuntu.com/Releases
 [9]: #slave_box
 
 ### `master_cpus`
@@ -186,29 +182,6 @@ This configuration does not apply if [`master_acts_as_slave`][5] is set to
 
 [17]: https://www.virtualbox.org/manual/ch01.html#gui-createvm
 [18]: #slave_memory_mb
-
-### `keyboard_layout`
-
-Keyboard layout. Defaults to `nil` (nothing will be done about it).
-
-If not `nil`, then it must be a 2-letter country code that specifies a keyboard
-layout. For example, set to "se" for Swedish or "de" for German. For more
-information, click [here][19].
-
-If `nil`, then our provisioning applies no sorcery and the keyboard layout will
-be whatever the OS wants him to be; "for most platforms" this is "us"
-([source][20]).
-
-This configuration value applies to the master node only. It is expected that
-you will SSH into slave nodes using a properly configured terminal and keyboard
-on the host machine ;)
-
-**Please note** that a custom layout only bites after an immediate reboot
-following machine provisioning and only if prior to this reboot you did not use
-the OS such as opening up a terminal! Don't ask me why. Maybe it's a feature.
-
-[19]: https://wiki.archlinux.org/index.php/Keyboard_configuration_in_Xorg
-[20]: http://manpages.ubuntu.com/manpages/xenial/man5/keyboard.5.html#contenttoc2
 
 ### `install_ansible_roles`
 

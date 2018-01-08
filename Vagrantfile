@@ -7,10 +7,9 @@ CONFIGURATION = {
   ip_start: '192.168.60.',
   
   master_acts_as_slave: false,
-  master_box: 'fso/artful64-desktop',
+  master_box: 'pristine/ubuntu-budgie-17-x64',
   master_cpus: Etc.nprocessors,
   master_memory_mb: 4096,
-  keyboard_layout: nil,
   
   install_ansible_roles: false,
   
@@ -69,10 +68,6 @@ Vagrant.configure('2') do |config|
         vb.gui = true
         vb.cpus = C[:master_cpus]
         vb.memory = C[:master_memory_mb]
-        vb.customize ['modifyvm', :id,
-          '--vram', '256',
-          '--accelerate3d', 'off',
-          '--accelerate2dvideo', 'on']
       end
     end
   end
@@ -112,10 +107,6 @@ Vagrant.configure('2') do |config|
     config.vm.provision 'ansible', type: :ansible_local do |ansible|
       ansible.playbook = 'provisioning/playbook.yml'
       ansible.limit = 'all'
-      
-      if C[:keyboard_layout]
-        ansible.extra_vars = { keyboard_layout: C[:keyboard_layout] }
-      end
       
       ansible.host_vars = {}
       private_keys.each do |machine, key|

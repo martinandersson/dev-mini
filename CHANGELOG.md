@@ -9,7 +9,30 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ### Changed
 
+- Changed the master box from the undocumented and treacherous
+  [`fso/artful64-desktop`][unreleased-1] to the well-documented and stable
+  [`pristine/ubuntu-budgie-17-x64`][unreleased-2]. The reasons for this move is
+  performance and stability. The Budgie desktop is snappy and responsive, as
+  well as beautiful to look at. One doesn't have to be ashamed of using Linux
+  when using Budgie. Plus, the pristine boxes are handcrafted high quality with
+  all necessary hacks implemented for a smooth experience. The switch has two
+  consequences:
+  1. The document `./notes/unattended-upgrades` is deleted. The new box
+    effectively solves this problem once and for all.
+  1. The `keyboard_layout` configuration goes away. I tried about five million
+    different command-line Voodoo tricks to set a keyboard layout as part of the
+    provisioning without the GUI and I also tried the only [Ansible Role
+    available][unreleased-3], but nothing worked. I even compared two disk
+    snapshots and repeated exactly the effects of the GUI-solution - i.e., I
+    modded tons of files all over the place which for whatever reason had
+    duplicated the keyboard layout value(s), but even this didn't work. So, fuck
+    it. It takes about 10 seconds for the user to change the layout using the
+    "Region and language" GUI app anyways.
 - Moved notes to its own directory `./notes`.
+
+[unreleased-1]: https://app.vagrantup.com/fso/boxes/artful64-desktop
+[unreleased-2]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-17-x64
+[unreleased-3]: https://galaxy.ansible.com/gantsign/keyboard/
 
 ## [1.0.1] - 2017-11-19
 
