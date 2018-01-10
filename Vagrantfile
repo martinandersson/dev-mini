@@ -97,7 +97,7 @@ Vagrant.configure('2') do |config|
     end
     
     roles_file = 'provisioning/requirements.yml'
-    install_ansible_roles = (File.exist? roles_file) && !(Psych.load_file(roles_file, nil).equal? nil)
+    install_ansible_roles = File.exist?(roles_file) && !Psych.load_file(roles_file, nil).equal?(nil)
     
     if install_ansible_roles
       config.vm.provision 'preemptively give others write access to /etc/ansible/roles', type: :shell, inline: <<~'EOM'
