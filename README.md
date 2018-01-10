@@ -160,7 +160,7 @@ Gorilla research uniformly points to a performance improvement using _all_
 available cores including logical (see [this][12], [that][13] and the
 [third][14]). It appears that VirtualBox simply got spooked over reports that
 heavy CPU loads could erm.. crash VirtualBox (see [this][15] and [that][16]). So
-the "fix" was to simply discourage users from using all their CPUs? L-O-L.
+the "fix" was to simply discourage users from using all of their CPUs? L-O-L.
 
 [10]: #slave_cpus
 [11]: https://www.virtualbox.org/manual/ch03.html
