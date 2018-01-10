@@ -11,8 +11,6 @@ CONFIGURATION = {
   master_cpus: Etc.nprocessors,
   master_memory_mb: 4096,
   
-  install_ansible_roles: false,
-  
   slave_box: 'mhubbard/centos7',
   slave_cpus: 2,
   slave_memory_mb: 512
@@ -29,6 +27,7 @@ CONFIGURATION = {
 end
 
 require 'date'
+require 'psych'
 
 Vagrant.configure('2') do |config|
   config.hostmanager.enabled = true
@@ -97,7 +96,12 @@ Vagrant.configure('2') do |config|
       EOM
     end
     
-    if C[:install_ansible_roles]
+    roles_file = 'provisioning/requirements.yml'
+    install_ansible_roles = (File.exist? roles_file) && !(Psych.load_file(roles_file, nil).equal? nil)
+    
+    p install_ansible_roles
+    
+    if install_ansible_roles
       config.vm.provision 'preemptively give others write access to /etc/ansible/roles', type: :shell, inline: <<~'EOM'
         mkdir /etc/ansible/roles -p
         chmod o+w /etc/ansible/roles
@@ -131,8 +135,8 @@ Vagrant.configure('2') do |config|
       ansible.install_mode = :pip_args_only
       ansible.pip_args = 'ansible==2.4.1.0'
       
-      if C[:install_ansible_roles]
-        ansible.galaxy_role_file = 'provisioning/requirements.yml'
+      if install_ansible_roles
+        ansible.galaxy_role_file = roles_file
         ansible.galaxy_roles_path = '/etc/ansible/roles'
         ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path}'
       end
