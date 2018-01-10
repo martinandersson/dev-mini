@@ -18,7 +18,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
   all necessary hacks implemented for a smooth experience. The switch has two
   consequences:
   1. The document `./notes/unattended-upgrades` is deleted. The new box
-    effectively solves this problem once and for all.
+    [documents this issue][unreleased-4].
   1. The `keyboard_layout` configuration goes away. I tried about five million
     different command-line Voodoo tricks to set a keyboard layout as part of the
     provisioning without the GUI and I also tried the only [Ansible Role
@@ -33,6 +33,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 [unreleased-1]: https://app.vagrantup.com/fso/boxes/artful64-desktop
 [unreleased-2]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-17-x64
 [unreleased-3]: https://galaxy.ansible.com/gantsign/keyboard/
+[unreleased-4]: https://github.com/martinanderssondotcom/box-ubuntu-budgie-17-x64/issues/3
 
 ## [1.0.1] - 2017-11-19
 
