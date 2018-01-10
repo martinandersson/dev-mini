@@ -187,19 +187,6 @@ This configuration does not apply if [`master_acts_as_slave`][5] is set to
 [17]: https://www.virtualbox.org/manual/ch01.html#gui-createvm
 [18]: #slave_memory_mb
 
-### `install_ansible_roles`
-
-If `true`, will automagically install Ansible roles defined in
-`./provisioning/requirements.yml` on the last machine before having the same
-machine run all plays defined in `./provisioning/playbook.yml`. By default, the
-value is `false`.
-
-This flag is currently needed to avoid passing the `ansible-galaxy` command an
-empty requirements file (this file is empty until you put roles in it). Cuz if
-we do, Ansible Galaxy crash. In the future, this flag will be replaced with
-in-script logic that figures out whether or not to call Ansible Galaxy without
-human intervention.
-
 ### `slave_box`
 
 Same as [`master_box`][21] except this configuration value applies to slaves
@@ -234,12 +221,9 @@ names in the playbook as well as two dynamically defined host groups; `master`
 and `slaves`.
 
 If you use [Ansible roles][25], then these can be automagically installed on the
-controller but you must do two things! First, put 'em in
-`./provisioning/requirements.yml` and then set [`install_ansible_roles`][26] to
-`true`.
+controller. Simply put them in `./provisioning/requirements.yml`.
 
 [25]: https://galaxy.ansible.com/list
-[26]: #install_ansible_roles
 
 ## Change log
 
