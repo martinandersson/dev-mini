@@ -4,7 +4,7 @@
 # See README.md
 CONFIGURATION = {
   machine_names: ['my-ubuntu'],
-  ip_start: '192.168.60.',
+  ip_start: '192.168.60.10',
   
   master_acts_as_slave: false,
   master_box: 'pristine/ubuntu-budgie-17-x64',
@@ -45,7 +45,8 @@ Vagrant.configure('2') do |config|
   # Setup baseline
   C[:machine_names].each.with_index do |name, index|
     config.vm.define name do |machine|
-      ip = C[:ip_start] + (10 + index).to_s
+      parts = C[:ip_start].rpartition '.'
+      ip = parts.first + '.' + (parts.last.to_i + index).to_s
       
       machine.vm.box = C[:slave_box]
       

@@ -83,23 +83,32 @@ configuration.
 
 ### `ip_start`
 
-Defines the first three bytes of the private IP addresses used. Defaults to
-`'192.168.60.'`.
+Defines the first static IP in a generated range of IPs used by the VMs on a
+private network. Defaults to `'192.168.60.10'`.
 
-All machines will use the same private network. This configuration value
-dictates the start of the IP range used. The full range is, of course, dependent
-on how many machines are defined.
+If only one machine is defined, then only one IP will be used. Subsequent
+machines will get an IP similar to the previous machine's IP except the last
+byte will have been incremented by 1. For example, if multiple machines are
+defined and the default value is not changed, then the *second* machine will be
+assigned IP "192.168.60.11". The *third* machine will be assigned IP
+"192.168.60.12", and so on.
 
-The configuration value affects only the first three bytes of the IP addresses
-used. The last byte is always `1` for the host (i.e. by default, `192.168.60.1`)
-and `10` for the master (`192.168.60.10`). If slaves are defined, their last
-byte will be `11`, `12` and so on.
+The IP will be appended to the machine's VirtualBox name and is thus clearly
+visible in the VirtualBox GUI's machine list.
 
-With this information in mind, I would never define more slave machines than 245
-(255-10) lololol. If you do, let me know what happened.
+For the VirtualBox provider, what Vagrant calls a "private network" is
+translated into NAT + host-only (VirtualBox lingo, see [VirtualBox docs][ip-1]).
+The NAT part enables Internet access from the VMs. The host-only part puts the
+host and VMs together on an internal network such that all machines can see each
+other. But, the outside world can not initiate a connection with anyone of the
+VMs.
 
-The full IP address will be appended to the machine's VirtualBox name and is
-thus visible directly in the machine list located in the VirtualBox GUI.
+The host IP on the internal network defaults to the network address + ".1".
+I.e., by default, unless the ip_start configuration is changed, this will be
+`192.168.60.1` ([VirtualBox docs][ip-2]).
+
+[ip-1]: https://www.virtualbox.org/manual/ch06.html#network_hostonly
+[ip-2]: https://www.virtualbox.org/manual/ch06.html#network_nat_service
 
 ### `master_acts_as_slave`
 
