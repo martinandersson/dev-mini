@@ -55,13 +55,13 @@ Initial release.
 
 ### Added
 
-- `./README.md`
-- `./Vagrantfile`
-- `./provisioning/playbook.yml`
-- `./provisioning/requirements.yml`
-- `./provisioning/changelog.md`
-- `./provisioning/box-failures.md`
-- `./provisioning/unattended-upgrades.md`
+- `README.md`
+- `Vagrantfile`
+- `provisioning/playbook.yml`
+- `provisioning/requirements.yml`
+- `provisioning/changelog.md`
+- `provisioning/box-failures.md`
+- `provisioning/unattended-upgrades.md`
 
 [Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.1...HEAD
 [1.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.0...v1.0.1
