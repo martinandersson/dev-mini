@@ -7,6 +7,10 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [Unreleased]
 
+### Added
+
+- `notes/examples.md`
+
 ### Changed
 
 - Completely new configuration model, as described in README.md. Most
@@ -22,7 +26,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
   when using Budgie. Plus, the pristine boxes are handcrafted high quality with
   all necessary hacks implemented for a smooth experience. The switch has two
   consequences:
-  1. The document `./notes/unattended-upgrades` is deleted. The new box
+  1. The document `notes/unattended-upgrades` is deleted. The new box
      [documents this issue][unreleased-4].
   1. The `keyboard_layout` configuration goes away. I tried about five million
      different command-line Voodoo tricks to set a keyboard layout as part of
@@ -33,7 +37,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
      duplicated the keyboard layout value(s), but even this didn't work. So,
      fuck it. It takes about 10 seconds for the user to change the layout using
      the "Region and language" GUI app anyways.
-- Moved notes to its own directory `./notes`.
+- Moved notes to its own directory `notes/`.
 
 [unreleased-6]: https://github.com/martinanderssondotcom/mini-dev/issues/3
 [unreleased-1]: https://github.com/martinanderssondotcom/mini-dev/issues/9
