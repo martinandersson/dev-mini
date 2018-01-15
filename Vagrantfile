@@ -104,12 +104,7 @@ end
 Vagrant.configure('2') do |config|
   config.vm.define controller do |last|
     private_keys.each do |machine, key|
-      config.vm.provision 'set vagrant-exclusive access to private key for ' + machine, type: :shell, inline: <<~EOM
-        if [[ -f #{key[:new]} ]] ; then
-          echo 'Key already setup :)'
-          exit
-        fi
-        
+      config.vm.provision 'set Vagrant-exclusive access to private key for ' + machine, type: :shell, inline: <<~EOM
         cp #{key[:old]} #{key[:new]}
         chown vagrant:vagrant #{key[:new]}
         chmod 400 #{key[:new]}
