@@ -24,7 +24,7 @@ Examples can be found in [notes/examples.md][intro-3].
 
 [intro-1]: #dependencies
 [intro-2]: https://ubuntubudgie.org/
-[intro-3]: https://github.com/martinanderssondotcom/mini-dev/blob/master/examples.md
+[intro-3]: https://github.com/martinanderssondotcom/mini-dev/blob/master/notes/examples.md
 
 ## Dependencies
 
