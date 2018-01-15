@@ -3,6 +3,9 @@
 This document provides a few examples on how to configure `Vagrantfile` and
 related files in `provisioning/`.
 
+1. [Playing with Ansible](#playing-with-ansible)
+1. [Playing with Docker](#playing-with-docker)
+
 ## Playing with Ansible
 
 Ansible - in full compliance with modern and sad software principles - has
