@@ -9,6 +9,10 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ### Changed
 
+- Completely new configuration model, as described in README.md. Most
+  importantly, the concept of "master" and "slave" is gone. We simply work with
+  configuration profiles, of which any number of machines can be instantiated.
+  Also, see [issue #3][unreleased-6].
 - Removed the `install_ansible_roles` flag ([issue #9][unreleased-1]).
 - Changed the master box from the undocumented and treacherous
   [`fso/artful64-desktop`][unreleased-2] to the well-documented and stable
@@ -31,6 +35,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
      the "Region and language" GUI app anyways.
 - Moved notes to its own directory `./notes`.
 
+[unreleased-6]: https://github.com/martinanderssondotcom/mini-dev/issues/3
 [unreleased-1]: https://github.com/martinanderssondotcom/mini-dev/issues/9
 [unreleased-2]: https://app.vagrantup.com/fso/boxes/artful64-desktop
 [unreleased-3]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-17-x64

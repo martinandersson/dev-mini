@@ -1,19 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# See README.md
 CONFIGURATION = {
-  machine_names: ['my-ubuntu'],
-  ip_start: '192.168.60.10',
-  
-  master_acts_as_slave: false,
-  master_box: 'pristine/ubuntu-budgie-17-x64',
-  master_cpus: Etc.nprocessors,
-  master_memory_mb: 4096,
-  
-  slave_box: 'mhubbard/centos7',
-  slave_cpus: 2,
-  slave_memory_mb: 512
+  machines: 'my-ubuntu',
+  # https://github.com/martinanderssondotcom/box-ubuntu-budgie-17-x64
+  box: 'pristine/ubuntu-budgie-17-x64',
+  first_ip: '192.168.60.10',
+  cpus: Etc.nprocessors,
+  memory_mb: 4096
 }
 
 
@@ -26,63 +20,88 @@ CONFIGURATION = {
   end
 end
 
+
 require 'date'
 require 'psych'
+
 
 Vagrant.configure('2') do |config|
   config.hostmanager.enabled = true
   config.hostmanager.include_offline = true
   
-  C = CONFIGURATION
-  
-  # General stuff
   config.vm.provider 'virtualbox' do |vb|
     vb.linked_clone = true
-    vb.cpus = C[:slave_cpus]
-    vb.memory = C[:slave_memory_mb]
   end
-  
-  # Setup baseline
-  C[:machine_names].each.with_index do |name, index|
+end
+
+
+def configure_machine options
+  Vagrant.configure('2') do |config|
+    name = options[:name]
+    
     config.vm.define name do |machine|
-      parts = C[:ip_start].rpartition '.'
-      ip = parts.first + '.' + (parts.last.to_i + index).to_s
-      
-      machine.vm.box = C[:slave_box]
-      
+      machine.vm.box = options[:box]
+      ip = options[:ip]
       machine.vm.network 'private_network', ip: ip
       machine.vm.hostname = name
       
-      machine.vm.provider('virtualbox') { |vb|
+      machine.vm.provider('virtualbox') do |vb|
         vb.name = name + " [#{ip}] (saw light #{Date.today})"
-      }
-    end
-  end
-  
-  # Maybe override some stuff for master
-  unless C[:master_acts_as_slave]
-    config.vm.define C[:machine_names].first do |master|
-      master.vm.box = C[:master_box]
-      
-      master.vm.provider 'virtualbox' do |vb|
-        vb.gui = true
-        vb.cpus = C[:master_cpus]
-        vb.memory = C[:master_memory_mb]
+        vb.cpus = options[:cpus]
+        vb.memory = options[:memory]
+        
+        unless options[:gui].equal? nil
+          vb.gui = options[:gui]
+        end
       end
     end
   end
+end
+
+
+machine_names = []
+
+ansible_groups = Hash.new { |hash, key|
+  hash[key] = []
+}
+
+
+# Walk through all profiles and feed each machine to configure_machine()
+(CONFIGURATION.is_a?(Hash) ? [CONFIGURATION] : CONFIGURATION).each do |profile|
+  ip_parts = profile[:first_ip].rpartition '.'
   
-  # Setup Ansible controller
-  # (some of it explained here: https://stackoverflow.com/a/46045193)
-  controller = C[:machine_names].last
-  
-  private_keys = C[:machine_names].grep_v(controller).reduce({}) do |hash, machine|
-    hash[machine] = {
-      old: "/vagrant/.vagrant/machines/#{machine}/virtualbox/private_key",
-      new: '/home/vagrant/.ssh/private_key_' + machine }
-    hash
+  arr = *profile[:machines]
+  arr.each.with_index do |name, index|
+    configure_machine name: name,
+      box: profile[:box],
+      ip: ip_parts.first + '.' + (ip_parts.last.to_i + index).to_s,
+      cpus: profile[:cpus],
+      memory: profile[:memory_mb],
+      gui: profile[:gui]
+    
+    machine_names << name
+    
+    grp = profile[:ansible_group]
+    
+    unless grp.equal? nil
+      ansible_groups[grp] << name
+    end
   end
-  
+end
+
+
+# Setup the Ansible controller
+# Some of it explained here: https://stackoverflow.com/a/46045193
+controller = machine_names.last
+
+private_keys = machine_names.grep_v(controller).reduce({}) do |hash, machine|
+  hash[machine] = {
+    old: "/vagrant/.vagrant/machines/#{machine}/virtualbox/private_key",
+    new: '/home/vagrant/.ssh/private_key_' + machine }
+  hash
+end
+
+Vagrant.configure('2') do |config|
   config.vm.define controller do |last|
     private_keys.each do |machine, key|
       config.vm.provision 'set vagrant-exclusive access to private key for ' + machine, type: :shell, inline: <<~EOM
@@ -98,9 +117,9 @@ Vagrant.configure('2') do |config|
     end
     
     roles_file = 'provisioning/requirements.yml'
-    install_ansible_roles = File.exist?(roles_file) && !Psych.load_file(roles_file, nil).equal?(nil)
+    install_roles = File.exist?(roles_file) && !Psych.load_file(roles_file, nil).equal?(nil)
     
-    if install_ansible_roles
+    if install_roles
       config.vm.provision 'preemptively give others write access to /etc/ansible/roles', type: :shell, inline: <<~'EOM'
         mkdir /etc/ansible/roles -p
         chmod o+w /etc/ansible/roles
@@ -119,14 +138,7 @@ Vagrant.configure('2') do |config|
         }
       end
       
-      ansible.groups = {}
-      ansible.groups['slaves'] = C[:machine_names].drop 1
-      
-      if C[:master_acts_as_slave]
-        ansible.groups['slaves'] << C[:machine_names].first
-      else
-        ansible.groups['master'] = [ C[:machine_names].first ]
-      end
+      ansible.groups = ansible_groups
       
       # I use pip args only to stop Vagrant from tossing in the upgrade flag. Not
       # sure wtf that flag does. See:
@@ -134,7 +146,7 @@ Vagrant.configure('2') do |config|
       ansible.install_mode = :pip_args_only
       ansible.pip_args = 'ansible==2.4.1.0'
       
-      if install_ansible_roles
+      if install_roles
         ansible.galaxy_role_file = roles_file
         ansible.galaxy_roles_path = '/etc/ansible/roles'
         ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path}'

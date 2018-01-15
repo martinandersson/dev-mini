@@ -4,25 +4,17 @@
   become: yes
   tasks:
   - name: Update apt's repository indices
-    # Equivalent to 'apt-get update'.
-    # https://askubuntu.com/a/222352
     apt:
       update_cache: yes
       cache_valid_time: 3600  # ..seconds = 1 hour
     when: ansible_distribution in ['Ubuntu', 'Debian']
 
-
-- name: Provision master
-  hosts: master
+- name: Yet another provisioning example
+  # May refer to machine names and/or Ansible groups as specified in
+  # Vagrantfile, separated by colons.
+  # http://docs.ansible.com/ansible/latest/playbooks_intro.html#hosts-and-users
+  hosts: my-ubuntu
   gather_facts: no
   tasks:
-  - name: Be helpful
-    debug: msg="Here is where you can add provisioning stuff for the master :)"
-
-
-- name: Provision slaves
-  hosts: slaves
-  gather_facts: no
-  tasks:
-  - name: Be helpful
-    debug: msg="Here is where you can add provisioning stuff for slaves :)"
+  - name: Greet
+    debug: msg="Hello, World!"
