@@ -10,9 +10,6 @@
     when: ansible_distribution in ['Ubuntu', 'Debian']
 
 - name: Yet another provisioning example
-  # May refer to machine names and/or Ansible groups as specified in
-  # Vagrantfile, separated by colons.
-  # http://docs.ansible.com/ansible/latest/playbooks_intro.html#hosts-and-users
   hosts: my-ubuntu
   gather_facts: no
   tasks:
