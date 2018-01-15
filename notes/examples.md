@@ -8,14 +8,15 @@ related files in `provisioning/`.
 
 ## Playing with Ansible
 
-Ansible - in full compliance with modern and sad software principles - has
-insufficient documentation. As an example, all but the most simple playbooks
-use [host facts][ans-1]. But which host facts exist, possible values and what
-these values mean is completely nondocumented. It's like going to a restaurant
-and not even get a food menu. [Recent work][ans-2] has added just a tiny bit of
-docs to cover for this, but I doubt we will ever see proper documentation which
-in a perfect and sane world would go so far as to describe not only which host
-facts exists, but even *how* they were gathered from the target machine.
+Ansible - in full compliance with modern and sad software principles - suffers
+from insufficient documentation. As an example, all but the most simple
+playbooks use [host facts][ans-1]. But which host facts exist, possible values
+and what these values mean is completely nondocumented. It's like going to a
+restaurant and not even get a food menu. [Recent work][ans-2] has added just a
+tiny bit of docs to cover for this, but I doubt we will ever see proper
+documentation which in a perfect and sane world would go so far as to describe
+not only which host facts exists, but even *how* they were gathered from the
+target machine.
 
 Having that said, this example will investigate what values we might see for two
 such nondocumented host facts; `ansible_os_family` and `ansible_distribution`.
