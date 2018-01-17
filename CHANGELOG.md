@@ -13,6 +13,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ### Changed
 
+- Upgraded Ansible from version `2.4.1.0` to version `2.4.2.0` ([issue #17][unreleased-7]).
 - Completely new configuration model, as described in README.md. Most
   importantly, the concept of "master" and "slave" is gone. We simply work with
   configuration profiles, of which any number of machines can be instantiated.
@@ -39,6 +40,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
      the "Region and language" GUI app anyways.
 - Moved notes to its own directory `notes/`.
 
+[unreleased-7]: https://github.com/martinanderssondotcom/mini-dev/issues/17
 [unreleased-6]: https://github.com/martinanderssondotcom/mini-dev/issues/3
 [unreleased-1]: https://github.com/martinanderssondotcom/mini-dev/issues/9
 [unreleased-2]: https://app.vagrantup.com/fso/boxes/artful64-desktop
