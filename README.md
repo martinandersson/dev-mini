@@ -224,8 +224,8 @@ in `provisioning/requirements.yml`.
 
 Vagrant will run the ansible provisioner only once during the first "vagrant
 up" call. Vagrant will by default not - for better or worse - run provisioning
-again. But, if the initial provisioning crashed or you just feel like running the
-playbook a second time, then do this:
+again. But, if the initial provisioning crashed or you just feel like running
+the playbook a second time, do this:
 
     vagrant provision --provision-with ansible
 
