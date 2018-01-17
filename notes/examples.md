@@ -99,4 +99,76 @@ Now, this outta work:
 
 ## Playing with Docker
 
-Work in progress.
+In this example we will setup a very simple Docker Swarm, constisting of one
+manager and one worker node.
+
+Put this configuration in the `Vagrantfile`:
+
+> CONFIGURATION = {  
+> &nbsp;&nbsp;machines: 'manager',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
+> &nbsp;&nbsp;first_ip: '192.168.60.10',  
+> &nbsp;&nbsp;cpus: Etc.nprocessors,  
+> &nbsp;&nbsp;memory_mb: 4096  
+> }, {  
+> &nbsp;&nbsp;machines: 'worker',  
+> &nbsp;&nbsp;box: 'mhubbard/centos7',  
+> &nbsp;&nbsp;first_ip: '192.168.60.11',  
+> &nbsp;&nbsp;cpus: 2,  
+> &nbsp;&nbsp;memory_mb: 512  
+> }
+
+Make this the contents of `provisioning/playbook.yml`:
+
+> \---  
+> \- name: Install Docker  
+> &nbsp;&nbsp;hosts: all  
+> &nbsp;&nbsp;become: yes  
+> &nbsp;&nbsp;vars:  
+> &nbsp;&nbsp;&nbsp;&nbsp;Ubuntu: docker-ce=17.12.0~ce-0~ubuntu  
+> &nbsp;&nbsp;&nbsp;&nbsp;CentOS: docker-ce-17.12.0.ce-1.el7.centos  
+> &nbsp;&nbsp;pre_tasks:  
+> &nbsp;&nbsp;- name: Ensure the docker group is present  
+> &nbsp;&nbsp;&nbsp;&nbsp;group: name=docker  
+> &nbsp;&nbsp;- name: Ensure vagrant belongs to the docker group  
+> &nbsp;&nbsp;&nbsp;&nbsp;user: name=vagrant groups=docker append=yes  
+> &nbsp;&nbsp;roles:  
+> &nbsp;&nbsp;- role: geerlingguy.docker  
+> &nbsp;&nbsp;&nbsp;&nbsp;docker_package: "{{ vars[ansible_distribution] }}"  
+> &nbsp;&nbsp;&nbsp;&nbsp;docker_compose_version: 1.18.0
+
+It's funny how the package name needs to be specified. One would think that not
+having to bother about platform-specific package names is sort of the whole
+point of using Ansible roles! Anyways, moving on..
+
+The `pre_tasks` added to this playbook is basically a Docker-sponsored
+hack so we don't have to prefix every docker command with sudo.
+<sup>[[source][docker-1]]</sup>
+
+The role needs to be installed before running the playbook. So put him in
+`provisioning/requirements.yml`:
+
+> \---  
+> \- src: geerlingguy.docker  
+> &nbsp;&nbsp;version: 2.1.0
+
+Do a `vagrant up` and everything should work just fine (lol I can't stop
+laughing).
+
+Next, do this:
+
+    $ vagrant ssh manager
+    vagrant@manager:~$ docker swarm init --advertise-addr 192.168.60.10:2377 --listen-addr 192.168.60.10:2377
+    To add a worker to this swarm, run the following command:
+    
+        docker swarm join --token SWMTKN-1-0mpfo3mdv1prhqgre5esahwoedpbq3ctxu60xbhjaq0kfxknru-0oarib6er7fh1bctbzbbotsza 192.168.60.10:2377
+    
+    To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+Run the command Docker gave us on the worker node:
+
+    $ vagrant ssh worker
+    [vagrant@worker ~]$ docker swarm join --token SWMTKN-1-0mpfo3mdv1prhqgre5esahwoedpbq3ctxu60xbhjaq0kfxknru-0oarib6er7fh1bctbzbbotsza 192.168.60.10:2377
+    This node joined a swarm as a worker.
+
+[docker-1]: https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user
