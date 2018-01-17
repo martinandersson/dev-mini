@@ -125,7 +125,7 @@ Make this the contents of `provisioning/playbook.yml`:
 > &nbsp;&nbsp;hosts: all  
 > &nbsp;&nbsp;become: yes  
 > &nbsp;&nbsp;vars:  
-> &nbsp;&nbsp;&nbsp;&nbsp;Ubuntu: docker-ce=17.12.0~ce-0~ubuntu  
+> &nbsp;&nbsp;&nbsp;&nbsp;Ubuntu: docker-ce=17.12.0\~ce-0\~ubuntu  
 > &nbsp;&nbsp;&nbsp;&nbsp;CentOS: docker-ce-17.12.0.ce-1.el7.centos  
 > &nbsp;&nbsp;pre_tasks:  
 > &nbsp;&nbsp;- name: Ensure the docker group is present  
