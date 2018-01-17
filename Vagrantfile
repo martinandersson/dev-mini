@@ -111,16 +111,6 @@ Vagrant.configure('2') do |config|
       EOM
     end
     
-    roles_file = 'provisioning/requirements.yml'
-    install_roles = File.exist?(roles_file) && !Psych.load_file(roles_file, nil).equal?(nil)
-    
-    if install_roles
-      config.vm.provision 'preemptively give others write access to /etc/ansible/roles', type: :shell, inline: <<~'EOM'
-        mkdir /etc/ansible/roles -p
-        chmod o+w /etc/ansible/roles
-      EOM
-    end
-    
     config.vm.provision 'ansible', type: :ansible_local do |ansible|
       ansible.playbook = 'provisioning/playbook.yml'
       ansible.limit = 'all'
@@ -139,11 +129,13 @@ Vagrant.configure('2') do |config|
       # sure wtf that flag does. See:
       # https://www.vagrantup.com/docs/provisioning/ansible_local.html#options
       ansible.install_mode = :pip_args_only
-      ansible.pip_args = 'ansible==2.4.1.0'
+      ansible.pip_args = 'ansible==2.4.2.0'
       
-      if install_roles
+      roles_file = 'provisioning/requirements.yml'
+      
+      if File.exist?(roles_file) && !Psych.load_file(roles_file, nil).equal?(nil)
         ansible.galaxy_role_file = roles_file
-        ansible.galaxy_roles_path = '/etc/ansible/roles'
+        ansible.galaxy_roles_path = '/home/vagrant/.ansible/roles/'
         ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path}'
       end
     end
