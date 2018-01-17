@@ -60,10 +60,10 @@ Make this the contents of `provisioning/playbook.yml`:
 > &nbsp;&nbsp;- name: Dump some facts  
 > &nbsp;&nbsp;&nbsp;&nbsp;debug: "msg='OS family/distribution: {{ansible_os_family}}/{{ansible_distribution}}'"
 
-All you need to do in order to run this playbook is `vagrant up` or `vagrant
-provision --provision-with ansible`. Behind the scenes, Vagrant executes
-`ansible-playbook` on the controller machine with a bunch of arguments, two of
-which are relevant for us:
+All you need to do in order to run this playbook is `vagrant up` *or* `vagrant
+provision --provision-with ansible` in case the environment is running already.
+Behind the scenes, Vagrant executes `ansible-playbook` on the controller machine
+with a bunch of arguments, two of which are relevant for us:
 
 - An auto-generated [inventory directory][ans-4]: `/tmp/vagrant-ansible/inventory`
 - The playbook: `provision/playbook.yml`

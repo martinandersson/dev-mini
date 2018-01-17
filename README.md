@@ -198,8 +198,8 @@ properly][gui-1] and no action is needed.
 
 ### `ansible_group`
 
-This configuration value is optional and defines one Ansible inventory group
-out of all the [`machines`][grp-1].
+This configuration value is optional and if provided, defines one Ansible
+inventory group which comprises all the [`machines`][grp-1] in the profile.
 
 [grp-1]: #machines
 
