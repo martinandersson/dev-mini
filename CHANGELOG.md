@@ -7,6 +7,10 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [Unreleased]
 
+Nothing important, yet!
+
+## [2.0.0] - 2018-01-17
+
 ### Added
 
 - `notes/examples.md`
@@ -69,5 +73,6 @@ Initial release.
 - `provisioning/box-failures.md`
 - `provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.0...v1.0.1
