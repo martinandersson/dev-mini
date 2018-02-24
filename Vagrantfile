@@ -21,7 +21,6 @@ CONFIGURATION = {
 end
 
 
-require 'date'
 require 'psych'
 
 
@@ -46,7 +45,7 @@ def configure_machine options
       machine.vm.hostname = name
       
       machine.vm.provider('virtualbox') do |vb|
-        vb.name = name + " [#{ip}] (saw light #{Date.today})"
+        vb.name = name + " (#{ip})"
         vb.cpus = options[:cpus]
         vb.memory = options[:memory]
         

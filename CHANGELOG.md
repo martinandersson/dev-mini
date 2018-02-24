@@ -7,7 +7,15 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [Unreleased]
 
-Nothing important, yet!
+### Changed
+
+- In the VirtualBox machine name, swap IP enclosing `[]` characters with `()`
+  ([issue #18][Unreleased-1]).
+- Do not append creation date stamp to the VirtualBox machine name
+  ([issue #19][Unreleased-2]).
+
+[Unreleased-1]: https://github.com/martinanderssondotcom/mini-dev/issues/18
+[Unreleased-2]: https://github.com/martinanderssondotcom/mini-dev/issues/19
 
 ## [2.0.0] - 2018-01-17
 

@@ -98,7 +98,7 @@ The name is used as..
 1. hostname (you may use the name instead of an IP address when communicating
    between guest machines)
 1. Vagrant's machine name (what you see when you do `vagrant status`)
-1. VirtualBox's machine name together with the node's- IP address and creation date
+1. VirtualBox's machine name (suffixed with the node's IP address in parenthesis)
 
 ### `box`
 
