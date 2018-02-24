@@ -205,7 +205,7 @@ inventory group which comprises all the [`machines`][grp-1] in the profile.
 
 ## Machine provisioning with Ansible
 
-This project has some built-in Ansible plumbing to help facilitate machine
+This project has some built-in Ansible plumbing to facilitate machine
 provisioning.
 
 Ansible will be installed on the last machine defined, hereafter referred to as
