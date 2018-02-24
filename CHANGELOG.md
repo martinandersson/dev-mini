@@ -7,15 +7,19 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [Unreleased]
 
+Nothing important, yet!
+
+## [2.0.1] - 2018-02-24
+
 ### Changed
 
 - In the VirtualBox machine name, swap IP enclosing `[]` characters with `()`
-  ([issue #18][Unreleased-1]).
+  ([issue #18][2.0.1-1]).
 - Do not append creation date stamp to the VirtualBox machine name
-  ([issue #19][Unreleased-2]).
+  ([issue #19][2.0.1-2]).
 
-[Unreleased-1]: https://github.com/martinanderssondotcom/mini-dev/issues/18
-[Unreleased-2]: https://github.com/martinanderssondotcom/mini-dev/issues/19
+[2.0.1-1]: https://github.com/martinanderssondotcom/mini-dev/issues/18
+[2.0.1-2]: https://github.com/martinanderssondotcom/mini-dev/issues/19
 
 ## [2.0.0] - 2018-01-17
 
@@ -82,6 +86,7 @@ Initial release.
 - `provisioning/box-failures.md`
 - `provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.0...v1.0.1
