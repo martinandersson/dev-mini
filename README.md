@@ -24,7 +24,7 @@ Examples can be found in [notes/examples.md][intro-3].
 
 [intro-1]: #dependencies
 [intro-2]: https://ubuntubudgie.org/
-[intro-3]: https://github.com/martinanderssondotcom/mini-dev/blob/master/notes/examples.md
+[intro-3]: https://github.com/martinanderssondotcom/dev-mini/blob/master/notes/examples.md
 
 ## Dependencies
 
@@ -80,7 +80,7 @@ Next, we go into details of the available configuration values that can be used.
 Almost all values are required. The only optional ones are [`gui`][conf-2] and
 [`ansible_group`][conf-3].
 
-[conf-1]: https://github.com/martinanderssondotcom/mini-dev/blob/master/Vagrantfile#L4-L11
+[conf-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L4-L11
 [conf-2]: #gui
 [conf-3]: #ansible_group
 
@@ -238,7 +238,7 @@ the playbook a second time, do this:
 
 See [CHANGELOG.md][27].
 
-[27]: https://github.com/martinanderssondotcom/mini-dev/blob/master/CHANGELOG.md
+[27]: https://github.com/martinanderssondotcom/dev-mini/blob/master/CHANGELOG.md
 
 ## License
 

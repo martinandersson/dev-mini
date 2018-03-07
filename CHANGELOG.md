@@ -7,7 +7,12 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [Unreleased]
 
-Nothing important, yet!
+### Changed
+
+- Changed project name from "mini-dev" to "dev-mini". This will hopefully make
+  forks easier to identify in enumerations and other listings. For example,
+  there is one planned fork I intend to make public that will be called
+  "dev-java-9".
 
 ## [2.0.1] - 2018-02-24
 
@@ -18,8 +23,8 @@ Nothing important, yet!
 - Do not append creation date stamp to the VirtualBox machine name
   ([issue #19][2.0.1-2]).
 
-[2.0.1-1]: https://github.com/martinanderssondotcom/mini-dev/issues/18
-[2.0.1-2]: https://github.com/martinanderssondotcom/mini-dev/issues/19
+[2.0.1-1]: https://github.com/martinanderssondotcom/dev-mini/issues/18
+[2.0.1-2]: https://github.com/martinanderssondotcom/dev-mini/issues/19
 
 ## [2.0.0] - 2018-01-17
 
@@ -57,9 +62,9 @@ Nothing important, yet!
      the "Region and language" GUI app anyways.
 - Moved notes to its own directory `notes/`.
 
-[2.0.0-7]: https://github.com/martinanderssondotcom/mini-dev/issues/17
-[2.0.0-6]: https://github.com/martinanderssondotcom/mini-dev/issues/3
-[2.0.0-1]: https://github.com/martinanderssondotcom/mini-dev/issues/9
+[2.0.0-7]: https://github.com/martinanderssondotcom/dev-mini/issues/17
+[2.0.0-6]: https://github.com/martinanderssondotcom/dev-mini/issues/3
+[2.0.0-1]: https://github.com/martinanderssondotcom/dev-mini/issues/9
 [2.0.0-2]: https://app.vagrantup.com/fso/boxes/artful64-desktop
 [2.0.0-3]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-17-x64
 [2.0.0-4]: https://github.com/martinanderssondotcom/box-ubuntu-budgie-17-x64/issues/3
@@ -86,7 +91,7 @@ Initial release.
 - `provisioning/box-failures.md`
 - `provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/mini-dev/compare/v2.0.1...HEAD
-[2.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v2.0.0...v2.0.1
-[2.0.0]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.1...v2.0.0
-[1.0.1]: https://github.com/martinanderssondotcom/mini-dev/compare/v1.0.0...v1.0.1
+[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v1.0.1...v2.0.0
+[1.0.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v1.0.0...v1.0.1

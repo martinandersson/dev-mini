@@ -94,7 +94,7 @@ Now, this outta work:
 
 [ans-1]: http://docs.ansible.com/ansible/latest/playbooks_variables.html#information-discovered-from-systems-facts
 [ans-2]: https://github.com/ansible/ansible/pull/34263
-[ans-3]: https://github.com/martinanderssondotcom/mini-dev/blob/master/Vagrantfile#L147
+[ans-3]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L147
 [ans-4]: http://docs.ansible.com/ansible/latest/intro_dynamic_inventory.html#using-inventory-directories-and-multiple-inventory-sources
 
 ## Playing with Docker
