@@ -9,6 +9,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ### Changed
 
+- Folder ignored by git renamed from `.ignored/` to `git-ignored/`.
 - Changed project name from "mini-dev" to "dev-mini". This will hopefully make
   forks easier to identify in enumerations and other listings. For example,
   there is one planned fork I intend to make public that will be called
