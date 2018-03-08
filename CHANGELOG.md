@@ -12,9 +12,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 - Upgraded Ansible from version `2.4.2.0` to version `2.4.3.0`.
 - Folder ignored by git renamed from `.ignored/` to `git-ignored/`.
 - Changed project name from "mini-dev" to "dev-mini". This will hopefully make
-  forks easier to identify in enumerations and other listings. For example,
-  there is one planned fork I intend to make public that will be called
-  "dev-java-9".
+  forks easier to identify in enumerations and other listings.
 
 ## [2.0.1] - 2018-02-24
 
