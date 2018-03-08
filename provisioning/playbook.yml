@@ -5,7 +5,6 @@
   tasks:
   - name: Update apt's repository indices
     apt:
-      update_cache: yes
       cache_valid_time: 3600  # ..seconds = 1 hour
     when: ansible_distribution in ['Ubuntu', 'Debian']
 
