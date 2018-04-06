@@ -3,8 +3,8 @@
 
 CONFIGURATION = {
   machines: 'my-ubuntu',
-  # https://github.com/martinanderssondotcom/box-ubuntu-budgie-17-x64
-  box: 'pristine/ubuntu-budgie-17-x64',
+  # https://github.com/martinanderssondotcom/box-ubuntu-budgie-18-x64
+  box: 'pristine/ubuntu-budgie-18-x64',
   first_ip: '192.168.60.10',
   cpus: Etc.nprocessors,
   memory_mb: 4096
