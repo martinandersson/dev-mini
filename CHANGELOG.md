@@ -9,6 +9,12 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ### Changed
 
+- Nothing, yet!
+
+## [2.0.2] - 2018-04-06
+
+### Changed
+
 - Upgraded Ansible from version `2.4.2.0` to version `2.4.3.0`.
 - Folder ignored by git renamed from `.ignored/` to `git-ignored/`.
 - Changed project name from "mini-dev" to "dev-mini". This will hopefully make
@@ -91,7 +97,8 @@ Initial release.
 - `provisioning/box-failures.md`
 - `provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.2...HEAD
+[2.0.2]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v1.0.0...v1.0.1
