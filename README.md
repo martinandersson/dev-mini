@@ -9,7 +9,7 @@ How to get going:
 1. Have all the [dependencies][intro-1] installed.
 1. `vagrant up`.
 
-By default, only one [Ubuntu Budgie 17][intro-2] VM is defined. But, many
+By default, only one [Ubuntu Budgie 18][intro-2] VM is defined. But, many
 machines using any number of configuration profiles (Vagrant box, static IP, et
 cetera..) may easily be set up thru editing configuration values at the top in
 the provided `Vagrantfile`. Furthermore, Ansible plumbing has been added to
@@ -52,7 +52,7 @@ machine**: <sup>[[source][conf-1]]</sup>
 
 > CONFIGURATION = {  
 > &nbsp;&nbsp;machines: 'my-ubuntu',  
-> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-18-x64',  
 > &nbsp;&nbsp;first_ip: '192.168.60.10',  
 > &nbsp;&nbsp;cpus: Etc.nprocessors,  
 > &nbsp;&nbsp;memory_mb: 4096  
@@ -66,7 +66,7 @@ machines**:
 
 > CONFIGURATION = {  
 > &nbsp;&nbsp;machines: 'desktop',  
-> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-18-x64',  
 > &nbsp;&nbsp;first_ip: '192.168.60.10',  
 > &nbsp;&nbsp;cpus: Etc.nprocessors,  
 > &nbsp;&nbsp;memory_mb: 4096  
