@@ -44,13 +44,21 @@ def define_machine options
       machine.vm.network 'private_network', ip: ip
       machine.vm.hostname = name
       
-      machine.vm.provider('virtualbox') do |vb|
-        vb.name = name + " (#{ip})"
-        vb.cpus = options[:cpus]
-        vb.memory = options[:memory]
+      # VMware
+      machine.vm.provider('vmware_desktop') do |v|
+        v.vmx['displayname'] = name + " (#{ip})"
+        v.vmx['numvcpus'] = options[:cpus]
+        v.vmx['memsize'] = options[:memory]
+      end
+      
+      # VirtualBox
+      machine.vm.provider('virtualbox') do |v|
+        v.name = name + " (#{ip})"
+        v.cpus = options[:cpus]
+        v.memory = options[:memory]
         
         unless options[:gui].equal? nil
-          vb.gui = options[:gui]
+          v.gui = options[:gui]
         end
       end
     end
