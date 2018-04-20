@@ -34,7 +34,7 @@ Vagrant.configure('2') do |config|
 end
 
 
-def configure_machine options
+def define_machine options
   Vagrant.configure('2') do |config|
     name = options[:name]
     
@@ -65,13 +65,13 @@ ansible_groups = Hash.new { |hash, key|
 }
 
 
-# Walk through all profiles and feed each machine to configure_machine()
+# Walk through all profiles and feed each machine to define_machine()
 (CONFIGURATION.is_a?(Hash) ? [CONFIGURATION] : CONFIGURATION).each do |profile|
   ip_parts = profile[:first_ip].rpartition '.'
   
   arr = *profile[:machines]
   arr.each.with_index do |name, index|
-    configure_machine name: name,
+    define_machine name: name,
       box: profile[:box],
       ip: ip_parts.first + '.' + (ip_parts.last.to_i + index).to_s,
       cpus: profile[:cpus],
