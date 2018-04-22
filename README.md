@@ -152,6 +152,12 @@ The host IP on the internal network defaults to the network address + ".1".
 I.e., by default, unless the first_ip configuration is changed, this will be
 `192.168.60.1`. <sup>[[source][ip-2]]</sup>
 
+What does a "private network" mean for the VMware provider? Who knows. It's
+certainly not on my high-priority list either since I consider this to be the
+responsibility of Vagrant to document (which they, of course, have not). I would
+guestimate the semantics should be the same as for VirtualBox. If you know
+something on this, please give me a holla.
+
 [ip-1]: https://www.virtualbox.org/manual/ch06.html#network_hostonly
 [ip-2]: https://www.virtualbox.org/manual/ch06.html#network_nat_service
 
