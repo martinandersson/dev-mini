@@ -9,7 +9,7 @@ How to get going:
 1. Have all the [dependencies][intro-1] installed.
 1. `vagrant up`.
 
-By default, only one [Ubuntu Budgie 17][intro-2] VM is defined. But, many
+By default, only one [Ubuntu Budgie 18][intro-2] VM is defined. But, many
 machines using any number of configuration profiles (Vagrant box, static IP, et
 cetera..) may easily be set up thru editing configuration values at the top in
 the provided `Vagrantfile`. Furthermore, Ansible plumbing has been added to
@@ -30,17 +30,27 @@ Examples can be found in [notes/examples.md][intro-3]. Also see
 
 ## Dependencies
 
-[Vagrant][dep-1] is used to run the `Vagrantfile` which uses a box- and
-configuration specific to the [VirtualBox][dep-2] provider. So both of these
-software packages must be installed on your host machine. I think you might also
-wanna put your hands on VirtualBox's [extension pack][dep-2].
+[Vagrant][dep-1] is used to run the `Vagrantfile` which uses a box that supports
+two VM _providers_: [VirtualBox][dep-2] and [VMware Desktop][dep-3].
+
+VMware "Desktop" is Vagrant's catch-all phrase for VMware _Fusion_ and VMware
+_Workstation_. Both of these effectively being the same product; the former is
+for MacOS and the latter is for Windows+Linux. Soon we'll probably have a third
+code word that separate the Windows implementation from Linux - because, you
+know, being confusing is like best practice these days.
+
+However that might be, Vagrant obviously needs to be installed together with at
+lesat one VM provider. If you go with VirtualBox, then you might also wanna put
+your hands on VirtualBox's [extension pack][dep-2] (because decoupling an app
+into multiple binaries and distributions is like also best practice these days).
 
 Ansible is **not** required to be installed on your host machine. See
-[Machine provisioning with Ansible][dep-3].
+[Machine provisioning with Ansible][dep-4].
 
 [dep-1]: https://www.vagrantup.com/downloads.html
 [dep-2]: https://www.virtualbox.org/wiki/Downloads
-[dep-3]: #machine-provisioning-with-ansible
+[dep-3]: https://www.vmware.com/products/personal-desktop-virtualization.html
+[dep-4]: #machine-provisioning-with-ansible
 
 ## Configuration
 
@@ -52,7 +62,7 @@ machine**: <sup>[[source][conf-1]]</sup>
 
 > CONFIGURATION = {  
 > &nbsp;&nbsp;machines: 'my-ubuntu',  
-> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-18-x64',  
 > &nbsp;&nbsp;first_ip: '192.168.60.10',  
 > &nbsp;&nbsp;cpus: Etc.nprocessors,  
 > &nbsp;&nbsp;memory_mb: 4096  
@@ -66,7 +76,7 @@ machines**:
 
 > CONFIGURATION = {  
 > &nbsp;&nbsp;machines: 'desktop',  
-> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-18-x64',  
 > &nbsp;&nbsp;first_ip: '192.168.60.10',  
 > &nbsp;&nbsp;cpus: Etc.nprocessors,  
 > &nbsp;&nbsp;memory_mb: 4096  
@@ -79,8 +89,8 @@ machines**:
 > }
 
 Next, we go into details of the available configuration values that can be used.
-Almost all values are required. The only optional ones are [`gui`][conf-2] and
-[`ansible_group`][conf-3].
+Almost all values are required. The only ones being optional are
+[`gui`][conf-2] and [`ansible_group`][conf-3].
 
 [conf-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L4-L11
 [conf-2]: #gui
@@ -101,6 +111,11 @@ The name is used as..
    between guest machines)
 1. Vagrant's machine name (what you see when you do `vagrant status`)
 1. VirtualBox's machine name (suffixed with the node's IP address in parenthesis)
+
+Note: The IP is also supposed to be added to VMware's display name. But this
+does not appear to work ([issue #21][machines-1]).
+
+[machines-1]: https://github.com/martinanderssondotcom/dev-mini/issues/21
 
 ### `box`
 
@@ -136,6 +151,12 @@ VMs.
 The host IP on the internal network defaults to the network address + ".1".
 I.e., by default, unless the first_ip configuration is changed, this will be
 `192.168.60.1`. <sup>[[source][ip-2]]</sup>
+
+What does a "private network" mean for the VMware provider? Who knows. It's
+certainly not on my high-priority list either since I consider this to be the
+responsibility of Vagrant to document (which they, of course, have not). I would
+guestimate the semantics should be the same as for VirtualBox. If you know
+something on this, please give me a holla.
 
 [ip-1]: https://www.virtualbox.org/manual/ch06.html#network_hostonly
 [ip-2]: https://www.virtualbox.org/manual/ch06.html#network_nat_service

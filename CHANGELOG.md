@@ -11,6 +11,16 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 - Nothing, yet!
 
+## [2.1.0] - 2018-04-22
+
+### Changed
+
+- Changed primary box to [`pristine/ubuntu-budgie-18-x64`][2.1.0-1].
+- Added support for the VMware provider.
+- Upgraded Ansible from version `2.4.3.0` to version `2.5.1`.
+
+[2.1.0-1]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-18-x64
+
 ## [2.0.2] - 2018-04-06
 
 ### Changed
@@ -22,7 +32,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [2.0.1] - 2018-02-24
 
-### Changed
+### Fixed
 
 - In the VirtualBox machine name, swap IP enclosing `[]` characters with `()`
   ([issue #18][2.0.1-1]).
@@ -78,7 +88,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [1.0.1] - 2017-11-19
 
-### Changed
+### Fixed
 
 - Fixed a bad variable reference which would crash the auto-installation of
   Vagrant plugins' dependencies.
@@ -98,6 +108,7 @@ Initial release.
 - `provisioning/unattended-upgrades.md`
 
 [Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.2...HEAD
+[2.1.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v1.0.1...v2.0.0

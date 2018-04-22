@@ -3,8 +3,8 @@
 
 CONFIGURATION = {
   machines: 'my-ubuntu',
-  # https://github.com/martinanderssondotcom/box-ubuntu-budgie-17-x64
-  box: 'pristine/ubuntu-budgie-17-x64',
+  # https://github.com/martinanderssondotcom/box-ubuntu-budgie-18-x64
+  box: 'pristine/ubuntu-budgie-18-x64',
   first_ip: '192.168.60.10',
   cpus: Etc.nprocessors,
   memory_mb: 4096
@@ -28,13 +28,19 @@ Vagrant.configure('2') do |config|
   config.hostmanager.enabled = true
   config.hostmanager.include_offline = true
   
+  # Prioritize VMware
+  # https://www.vagrantup.com/docs/providers/basic_usage.html#default-provider
+  ["vmware_desktop", "vmware_workstation", "vmware_fusion"].each { |confusing|
+    config.vm.provider confusing
+  }
+  
   config.vm.provider 'virtualbox' do |vb|
     vb.linked_clone = true
   end
 end
 
 
-def configure_machine options
+def define_machine options
   Vagrant.configure('2') do |config|
     name = options[:name]
     
@@ -44,13 +50,21 @@ def configure_machine options
       machine.vm.network 'private_network', ip: ip
       machine.vm.hostname = name
       
-      machine.vm.provider('virtualbox') do |vb|
-        vb.name = name + " (#{ip})"
-        vb.cpus = options[:cpus]
-        vb.memory = options[:memory]
+      # VMware
+      machine.vm.provider('vmware_desktop') do |v|
+        v.vmx['displayname'] = name + " (#{ip})"
+        v.vmx['numvcpus'] = options[:cpus]
+        v.vmx['memsize'] = options[:memory]
+      end
+      
+      # VirtualBox
+      machine.vm.provider('virtualbox') do |v|
+        v.name = name + " (#{ip})"
+        v.cpus = options[:cpus]
+        v.memory = options[:memory]
         
         unless options[:gui].equal? nil
-          vb.gui = options[:gui]
+          v.gui = options[:gui]
         end
       end
     end
@@ -65,13 +79,13 @@ ansible_groups = Hash.new { |hash, key|
 }
 
 
-# Walk through all profiles and feed each machine to configure_machine()
+# Walk through all profiles and feed each machine to define_machine()
 (CONFIGURATION.is_a?(Hash) ? [CONFIGURATION] : CONFIGURATION).each do |profile|
   ip_parts = profile[:first_ip].rpartition '.'
   
   arr = *profile[:machines]
   arr.each.with_index do |name, index|
-    configure_machine name: name,
+    define_machine name: name,
       box: profile[:box],
       ip: ip_parts.first + '.' + (ip_parts.last.to_i + index).to_s,
       cpus: profile[:cpus],
@@ -128,7 +142,7 @@ Vagrant.configure('2') do |config|
       # sure wtf that flag does. See:
       # https://www.vagrantup.com/docs/provisioning/ansible_local.html#options
       ansible.install_mode = :pip_args_only
-      ansible.pip_args = 'ansible==2.4.3.0'
+      ansible.pip_args = 'ansible==2.5.1'
       
       roles_file = 'provisioning/requirements.yml'
       
