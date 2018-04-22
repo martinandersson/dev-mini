@@ -22,7 +22,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [2.0.1] - 2018-02-24
 
-### Changed
+### Fixed
 
 - In the VirtualBox machine name, swap IP enclosing `[]` characters with `()`
   ([issue #18][2.0.1-1]).
@@ -78,7 +78,7 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 ## [1.0.1] - 2017-11-19
 
-### Changed
+### Fixed
 
 - Fixed a bad variable reference which would crash the auto-installation of
   Vagrant plugins' dependencies.
