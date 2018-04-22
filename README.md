@@ -30,17 +30,27 @@ Examples can be found in [notes/examples.md][intro-3]. Also see
 
 ## Dependencies
 
-[Vagrant][dep-1] is used to run the `Vagrantfile` which uses a box- and
-configuration specific to the [VirtualBox][dep-2] provider. So both of these
-software packages must be installed on your host machine. I think you might also
-wanna put your hands on VirtualBox's [extension pack][dep-2].
+[Vagrant][dep-1] is used to run the `Vagrantfile` which uses a box that supports
+two VM _providers_: [VirtualBox][dep-2] and [VMware Desktop][dep-3].
+
+VMware "Desktop" is Vagrant's catch-all phrase for VMware _Fusion_ and VMware
+_Workstation_. Both of these effectively being the same product; the former is
+for MacOS and the latter is for Windows+Linux. Soon we'll probably have a third
+code word that separate the Windows implementation from Linux - because, you
+know, being confusing is like best practice these days.
+
+However that might be, Vagrant obviously needs to be installed together with at
+lesat one VM provider. If you go with VirtualBox, then you might also wanna put
+your hands on VirtualBox's [extension pack][dep-2] (because decoupling an app
+into multiple binaries and distributions is like also best practice these days).
 
 Ansible is **not** required to be installed on your host machine. See
-[Machine provisioning with Ansible][dep-3].
+[Machine provisioning with Ansible][dep-4].
 
 [dep-1]: https://www.vagrantup.com/downloads.html
 [dep-2]: https://www.virtualbox.org/wiki/Downloads
-[dep-3]: #machine-provisioning-with-ansible
+[dep-3]: https://www.vmware.com/products/personal-desktop-virtualization.html
+[dep-4]: #machine-provisioning-with-ansible
 
 ## Configuration
 
