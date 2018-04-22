@@ -28,6 +28,12 @@ Vagrant.configure('2') do |config|
   config.hostmanager.enabled = true
   config.hostmanager.include_offline = true
   
+  # Prioritize VMware
+  # https://www.vagrantup.com/docs/providers/basic_usage.html#default-provider
+  ["vmware_desktop", "vmware_workstation", "vmware_fusion"].each { |confusing|
+    config.vm.provider confusing
+  }
+  
   config.vm.provider 'virtualbox' do |vb|
     vb.linked_clone = true
   end
