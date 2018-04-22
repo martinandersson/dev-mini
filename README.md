@@ -112,6 +112,11 @@ The name is used as..
 1. Vagrant's machine name (what you see when you do `vagrant status`)
 1. VirtualBox's machine name (suffixed with the node's IP address in parenthesis)
 
+Note: The IP is also supposed to be added to VMware's display name. But this
+does not appear to work ([issue #21][machines-1]).
+
+[machines-1]: https://github.com/martinanderssondotcom/dev-mini/issues/21
+
 ### `box`
 
 Defines which Vagrant box to use.
