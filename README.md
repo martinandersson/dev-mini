@@ -89,8 +89,8 @@ machines**:
 > }
 
 Next, we go into details of the available configuration values that can be used.
-Almost all values are required. The only optional ones are [`gui`][conf-2] and
-[`ansible_group`][conf-3].
+Almost all values are required. The only ones being optional are
+[`gui`][conf-2] and [`ansible_group`][conf-3].
 
 [conf-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L4-L11
 [conf-2]: #gui
