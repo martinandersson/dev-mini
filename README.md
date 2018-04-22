@@ -21,12 +21,12 @@ hacking together new Vagrantfiles for each unique software project. I like to
 see it as a template replacement for "vagrant init".
 
 Examples can be found in [notes/examples.md][intro-3]. Also see
-[dev-java-9][intro-4].
+[dev-java][intro-4].
 
 [intro-1]: #dependencies
 [intro-2]: https://ubuntubudgie.org/
 [intro-3]: https://github.com/martinanderssondotcom/dev-mini/blob/master/notes/examples.md
-[intro-4]: https://github.com/martinanderssondotcom/dev-java-9
+[intro-4]: https://github.com/martinanderssondotcom/dev-java
 
 ## Dependencies
 
