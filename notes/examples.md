@@ -40,7 +40,7 @@ Put this configuration in the `Vagrantfile`:
 > }, {  
 > &nbsp;&nbsp;machines: 'target2',  
 > &nbsp;&nbsp;ansible_group: 'targets',  
-> &nbsp;&nbsp;box: 'mhubbard/centos7',  
+> &nbsp;&nbsp;box: 'centos/7',  
 > &nbsp;&nbsp;first_ip: '192.168.60.12',  
 > &nbsp;&nbsp;cpus: 2,  
 > &nbsp;&nbsp;memory_mb: 512  
