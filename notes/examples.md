@@ -46,7 +46,7 @@ Put this configuration in the `Vagrantfile`:
 > &nbsp;&nbsp;memory_mb: 512  
 > }, {  
 > &nbsp;&nbsp;machines: 'controller',  
-> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-18-x64',  
 > &nbsp;&nbsp;first_ip: '192.168.60.10',  
 > &nbsp;&nbsp;cpus: Etc.nprocessors,  
 > &nbsp;&nbsp;memory_mb: 4096  
