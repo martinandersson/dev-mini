@@ -84,7 +84,7 @@ If we wanna fool around with Ansible manually outside the scope of the
 aforementioned playbook and Vagrant, then we need to describe our target
 inventory to Ansible. It can either be done explicitly per command invoked with
 the `-i` option, or we can configure Ansible to always use the inventory that
-Vagrant constructed for us:
+Vagrant constructed for us (run this on the controller):
 
     printf "[defaults]\ninventory = /tmp/vagrant-ansible/inventory/" >> ~/.ansible.cfg
 
