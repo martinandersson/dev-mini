@@ -83,7 +83,11 @@ Using `Windows 10`, `Vagrant 2.0.1`, `VirtualBox 5.2.0` with `Extensions Pack
 
 ### CentOS
 
-- `centos/7`: Everything except `/vagrant/.vagrant/` syncs, and then SSH crash because of it.
+- `centos/7`: Everything except `/vagrant/.vagrant/` syncs, and then SSH crash
+  because of it. The reason for this is because the included Vagrantfile
+  specifies synchronization type "rsync", and for whatever reason, Vagrant
+  excludes the `.vagrant` folder for this particular type. Seemingly, something
+  that can not be undone.
 - `bento/centos-7.4`:  Fail to mount synced dir.
 - `geerlingguy/centos7`: Fail to mount synced dir.
 
