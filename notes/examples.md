@@ -68,7 +68,7 @@ with a bunch of arguments, two of which are relevant for us:
 - An auto-generated [inventory directory][ans-4]: `/tmp/vagrant-ansible/inventory`
 - The playbook: `provision/playbook.yml`
 
-A piece of the output produced by Ansible version 2.4.2.0:
+A piece of the output produced by Ansible version 2.6.1:
 
 ```
 TASK [Dump some facts] *********************************************************
