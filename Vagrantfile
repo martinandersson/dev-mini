@@ -142,7 +142,7 @@ Vagrant.configure('2') do |config|
       # sure wtf that flag does. See:
       # https://www.vagrantup.com/docs/provisioning/ansible_local.html#options
       ansible.install_mode = :pip_args_only
-      ansible.pip_args = 'ansible==2.5.1'
+      ansible.pip_args = 'ansible==2.6.1'
       
       roles_file = 'provisioning/requirements.yml'
       
