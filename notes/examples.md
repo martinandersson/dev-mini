@@ -99,24 +99,42 @@ Now, this outta work:
 
 ## Playing with Docker
 
-In this example we will setup a very simple Docker Swarm, constisting of one
+In this example we will setup a very simple Docker Swarm, consisting of one
 manager and one worker node.
 
 Put this configuration in the `Vagrantfile`:
 
 > CONFIGURATION = {  
-> &nbsp;&nbsp;machines: 'manager',  
-> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-17-x64',  
-> &nbsp;&nbsp;first_ip: '192.168.60.10',  
-> &nbsp;&nbsp;cpus: Etc.nprocessors,  
-> &nbsp;&nbsp;memory_mb: 4096  
-> }, {  
 > &nbsp;&nbsp;machines: 'worker',  
-> &nbsp;&nbsp;box: 'mhubbard/centos7',  
+> &nbsp;&nbsp;box: 'centos/7',  
 > &nbsp;&nbsp;first_ip: '192.168.60.11',  
 > &nbsp;&nbsp;cpus: 2,  
 > &nbsp;&nbsp;memory_mb: 512  
+> }, {  
+> &nbsp;&nbsp;machines: 'manager',  
+> &nbsp;&nbsp;box: 'pristine/ubuntu-budgie-18-x64',  
+> &nbsp;&nbsp;first_ip: '192.168.60.10',  
+> &nbsp;&nbsp;cpus: Etc.nprocessors,  
+> &nbsp;&nbsp;memory_mb: 4096  
 > }
+
+It is important that the manager is defined last such that he becomes the
+Ansible controller. As opposed to letting Vagrant decide what synchronization
+type works best, the worker box (`centos/7`) has defined in its included
+Vagrantfile; _rsync_ to be the folder synchronization primitive and for this
+particular synchronization type, Vagrant excludes the `.vagrant/` folder.
+
+However, access to this folder is needed by the Ansible controller because
+that's how he gets his hands on private keys to use for SSH access into the
+other machines he wants to provision (see [these lines of code][docker-1]). Had
+the controller been running the `centos/7` box, then he wouldn't have found the
+`.vagrant/` folder and crashed.
+
+Of course - adhering to modern best practices - why Vagrant excludes this folder
+is completely [undocumented][docker-2] nor does it seem to be reversible. One
+can only add _more_ folders to exclude.
+
+Either way, problem solved by making the manager to also be the controller.
 
 Make this the contents of `provisioning/playbook.yml`:
 
@@ -125,8 +143,8 @@ Make this the contents of `provisioning/playbook.yml`:
 > &nbsp;&nbsp;hosts: all  
 > &nbsp;&nbsp;become: yes  
 > &nbsp;&nbsp;vars:  
-> &nbsp;&nbsp;&nbsp;&nbsp;Ubuntu: docker-ce=17.12.0\~ce-0\~ubuntu  
-> &nbsp;&nbsp;&nbsp;&nbsp;CentOS: docker-ce-17.12.0.ce-1.el7.centos  
+> &nbsp;&nbsp;&nbsp;&nbsp;Ubuntu: docker-ce=18.06.0\~ce\~3-0~ubuntu  
+> &nbsp;&nbsp;&nbsp;&nbsp;CentOS: docker-ce-18.06.0.ce-3.el7  
 > &nbsp;&nbsp;pre_tasks:  
 > &nbsp;&nbsp;- name: Ensure the docker group is present  
 > &nbsp;&nbsp;&nbsp;&nbsp;group: name=docker  
@@ -135,27 +153,49 @@ Make this the contents of `provisioning/playbook.yml`:
 > &nbsp;&nbsp;roles:  
 > &nbsp;&nbsp;- role: geerlingguy.docker  
 > &nbsp;&nbsp;&nbsp;&nbsp;docker_package: "{{ vars[ansible_distribution] }}"  
-> &nbsp;&nbsp;&nbsp;&nbsp;docker_compose_version: 1.18.0
+> &nbsp;&nbsp;&nbsp;&nbsp;docker_apt_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"  
+> &nbsp;&nbsp;&nbsp;&nbsp;docker_compose_version: 1.22.0
 
-It's funny how the package name needs to be specified. One would think that not
-having to bother about platform-specific package names is sort of the whole
-point of using Ansible roles! Anyways, moving on..
+We needed to specify weird-ass package names to be installed. Yes, despite using
+an Ansible role which one would think ought to sort that out by himself. Well,
+turns out - not too surprisingly - that Docker package naming is a science on
+its own and there exists no AI smart enough to handle this drama.
 
-The `pre_tasks` added to this playbook is basically a Docker-sponsored
-hack so we don't have to prefix every docker command with sudo.
-<sup>[[source][docker-1]]</sup>
+In theory, hacking together which Docker CE package name to use is a two-step
+process. First, go to [this page][docker-3] and click on the target OS. That
+will bring you to a new page listing an OS-specific package syntax to use. Then,
+because this documentation is almost guaranteed to be outdated, replace the
+version part with the latest and greatest version found on
+[this page][docker-4]. Easy peasy!
+
+But in practice, this doesn't hold. The package names in the repositories are
+not consistent and Docker's own website doesn't even list the latest releases.
+So the safest bet is to probe the repositories manually for each OS ([Ubuntu][docker-5], [CentOS][docker-6]).
+
+The latest and greatest version of Docker Compose is officially found on
+[this page][docker-7] and that is what I have used. I have not looked into the
+repository manually. Maybe I should, lol.
+
+The manager machine uses an Ubuntu 18.10 box and for the time being
+(2018-07-29), this particular version ("cosmic") does not have a dedicated
+Docker repository. Hence, we specifically point the Ansible role to the
+repository for 18.04 ("bionic") by redefining the `docker_apt_repository`
+variable. In the future, you should be able to remove this hack.
+
+The `pre_tasks` added is basically a [Docker-sponsored hack][docker-8] so we
+don't have to prefix every `docker` command with `sudo`.
 
 The role needs to be installed before running the playbook. So put him in
 `provisioning/requirements.yml`:
 
 > \---  
 > \- src: geerlingguy.docker  
-> &nbsp;&nbsp;version: 2.1.0
+> &nbsp;&nbsp;version: 2.5.1
 
 Do a `vagrant up` and everything should work just fine (lol I can't stop
 laughing).
 
-Next, do this:
+Next, do this (i.e., first SSH into manager and then type the command):
 
     $ vagrant ssh manager
     vagrant@manager:~$ docker swarm init --advertise-addr 192.168.60.10:2377 --listen-addr 192.168.60.10:2377
@@ -171,4 +211,11 @@ Run the command Docker gave us on the worker node:
     [vagrant@worker ~]$ docker swarm join --token SWMTKN-1-0mpfo3mdv1prhqgre5esahwoedpbq3ctxu60xbhjaq0kfxknru-0oarib6er7fh1bctbzbbotsza 192.168.60.10:2377
     This node joined a swarm as a worker.
 
-[docker-1]: https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+[docker-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L121-L123
+[docker-2]: https://www.vagrantup.com/docs/synced-folders/rsync.html#rsync__exclude
+[docker-3]: https://docs.docker.com/install/#server
+[docker-4]: https://docs.docker.com/release-notes/docker-ce
+[docker-5]: https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/
+[docker-6]: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/
+[docker-7]: https://github.com/docker/compose/releases
+[docker-8]: https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user
