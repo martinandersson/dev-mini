@@ -153,7 +153,7 @@ Make this the contents of `provisioning/playbook.yml`:
 > &nbsp;&nbsp;roles:  
 > &nbsp;&nbsp;- role: geerlingguy.docker  
 > &nbsp;&nbsp;&nbsp;&nbsp;docker_package: "{{ vars[ansible_distribution] }}"  
-> &nbsp;&nbsp;&nbsp;&nbsp;docker_apt_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"  
+> &nbsp;&nbsp;&nbsp;&nbsp;docker_apt_repository: "deb [arch=amd64] ht<span>tps://download</span>.docker.com/linux/ubuntu bionic stable"  
 > &nbsp;&nbsp;&nbsp;&nbsp;docker_compose_version: 1.22.0
 
 We needed to specify weird-ass package names to be installed. Yes, despite using
