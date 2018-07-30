@@ -126,7 +126,7 @@ particular synchronization type, Vagrant excludes the `.vagrant/` folder.
 
 However, access to this folder is needed by the Ansible controller because
 that's how he gets his hands on private keys to use for SSH access into the
-other machines he wants to provision (see [these lines of code][docker-1]). Had
+other machines he wants to provision (see [this line of code][docker-1]). Had
 the controller been running the `centos/7` box, then he wouldn't have found the
 `.vagrant/` folder and crashed.
 
@@ -211,7 +211,7 @@ Run the command Docker gave us on the worker node:
     [vagrant@worker ~]$ docker swarm join --token SWMTKN-1-0mpfo3mdv1prhqgre5esahwoedpbq3ctxu60xbhjaq0kfxknru-0oarib6er7fh1bctbzbbotsza 192.168.60.10:2377
     This node joined a swarm as a worker.
 
-[docker-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L121-L123
+[docker-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/Vagrantfile#L137
 [docker-2]: https://www.vagrantup.com/docs/synced-folders/rsync.html#rsync__exclude
 [docker-3]: https://docs.docker.com/install/#server
 [docker-4]: https://docs.docker.com/release-notes/docker-ce
