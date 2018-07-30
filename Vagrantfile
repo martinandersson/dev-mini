@@ -103,33 +103,78 @@ ansible_groups = Hash.new { |hash, key|
 end
 
 
-# Setup the Ansible controller
+# What follows is basically setting up the Ansible controller.
 # Some of it explained here: https://stackoverflow.com/a/46045193
+
 controller = machine_names.last
 
-private_keys = machine_names.grep_v(controller).reduce({}) do |hash, machine|
+# We must, for each machine we're trynna control, copy over the
+# Vagrant-generated private key to the controller and register the key with
+# Ansible.
+# 
+# PRIVATE_KEYS is a hash keyed by machine name (excluding the controller
+# itself). The value of each entry is another hash with two paths. The old path
+# is the path on the host machine and this value is provider-specific; can not
+# be parsed in the Vagrantfile at this moment so can not be fully built just
+# yet. The new path is the new local path on the Ansible controller.
+
+PRIVATE_KEYS = machine_names.grep_v(controller).reduce({}) do |hash, machine|
   hash[machine] = {
-    old: "/vagrant/.vagrant/machines/#{machine}/virtualbox/private_key",
+    old: "/vagrant/.vagrant/machines/#{machine}/{{provider}}/private_key",
     new: '/home/vagrant/.ssh/private_key_' + machine }
   hash
 end
 
+# The provision_key_copy method will register (rather, overrides; see later
+# comment) a shell provisioner which copies over the key from the old path on
+# the host machine to the new path on the controller.
+
+def provision_key_copy(config, provider)
+  PRIVATE_KEYS.each do |machine, key|
+    real_path = key[:old].sub '{{provider}}', provider
+    
+    config.vm.provision 'get private key from ' + machine, type: :shell, preserve_order: true, inline: <<~EOM
+      cp #{real_path} #{key[:new]}
+      chown vagrant:vagrant #{key[:new]}
+      chmod 400 #{key[:new]}
+    EOM
+  end
+end
+
 Vagrant.configure('2') do |config|
   config.vm.define controller do |last|
-    private_keys.each do |machine, key|
-      config.vm.provision 'set Vagrant-exclusive access to private key for ' + machine, type: :shell, inline: <<~EOM
-        cp #{key[:old]} #{key[:new]}
-        chown vagrant:vagrant #{key[:new]}
-        chmod 400 #{key[:new]}
-      EOM
-    end
     
-    config.vm.provision 'ansible', type: :ansible_local do |ansible|
+    # We have no access to the provider's name and therefore we must use a
+    # provider override to build the old key path. But here comes problem number
+    # two: Vagrant's "outside-in" order for provisioners would have meant that
+    # the Ansible provisioner executes first before the key has been copied
+    # which obviously is not a good thing and we have no way to explicitly set
+    # the order of execution.
+    # 
+    # So the only solution here is to preemptively declare the key-copy
+    # provisioner before the Ansible provisioner and then let Vagrant's provider
+    # override "supply the real implementation" afterwards. Please note that
+    # without the "preserve_order" flag in the provisioner override, this hack
+    # wouldn't have worked.
+    
+    PRIVATE_KEYS.each_key { |machine|
+      last.vm.provision 'get private key from ' + machine, type: :shell,
+        inline: 'echo Your stupid provider is not supported. Good luck bro.; exit 1;'
+    }
+    
+    ['virtualbox', 'vmware_workstation', 'vmware_fusion'].each { |p|
+      last.vm.provider p do |x, override|
+        provision_key_copy override, p
+      end
+    }
+    
+    last.vm.provision 'ansible', type: :ansible_local do |ansible|
       ansible.playbook = 'provisioning/playbook.yml'
       ansible.limit = 'all'
       
       ansible.host_vars = {}
-      private_keys.each do |machine, key|
+      
+      PRIVATE_KEYS.each do |machine, key|
         ansible.host_vars[machine] = {
           'ansible_ssh_private_key_file' => key[:new],
           'ansible_ssh_extra_args' => '-o StrictHostKeyChecking=no'
