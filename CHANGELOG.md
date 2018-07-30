@@ -11,6 +11,18 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 - Nothing, yet!
 
+## [2.2.0] - 2018-07-30
+
+### Changed
+
+- Upgraded Ansible from version `2.5.1` to version `2.6.1`.
+- Updated all documented examples.
+
+### Fixed
+
+- Fixed a bug where private keys for VMware-VMs wouldn't be copied to the
+  Ansible controller.
+
 ## [2.1.0] - 2018-04-22
 
 ### Added
@@ -110,7 +122,8 @@ Initial release.
 - `provisioning/box-failures.md`
 - `provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.0.0...v2.0.1
