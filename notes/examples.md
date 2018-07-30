@@ -132,7 +132,7 @@ the controller been running the `centos/7` box, then he wouldn't have found the
 
 Of course - adhering to modern best practices - why Vagrant excludes this folder
 is completely [undocumented][docker-2] nor does it seem to be reversible. One
-can only add _more_ folders to exclude.
+can only _add_ more folders to exclude.
 
 Either way, problem solved by making the manager to also be the controller.
 
