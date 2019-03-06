@@ -9,6 +9,14 @@ and this project **tries to** adhere to [Semantic Versioning](http://semver.org/
 
 - Nothing, yet!
 
+### Changed
+
+- Upgraded Ansible from version `2.7.2` to version `2.7.8`.
+- Dropped support for provider `vmware_workstation` and `vmware_fusion` (only
+  using `vmware_desktop` - see [this][2.2.2-1])
+
+[2.2.2-1]: https://www.hashicorp.com/blog/introducing-the-vagrant-vmware-desktop-plugin#what-s-new
+
 ## [2.2.1] - 2018-11-21
 
 ### Changed
