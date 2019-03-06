@@ -30,9 +30,7 @@ Vagrant.configure('2') do |config|
   
   # Prioritize VMware
   # https://www.vagrantup.com/docs/providers/basic_usage.html#default-provider
-  ["vmware_desktop", "vmware_workstation", "vmware_fusion"].each { |confusing|
-    config.vm.provider confusing
-  }
+  config.vm.provider 'vmware_desktop'
   
   config.vm.provider 'virtualbox' do |vb|
     vb.linked_clone = true
@@ -162,7 +160,7 @@ Vagrant.configure('2') do |config|
         inline: 'echo Your stupid provider is not supported. Good luck bro.; exit 1;'
     }
     
-    ['virtualbox', 'vmware_workstation', 'vmware_fusion'].each { |p|
+    ['virtualbox', 'vmware_desktop'].each { |p|
       last.vm.provider p do |x, override|
         provision_key_copy override, p
       end
