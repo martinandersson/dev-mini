@@ -1,16 +1,40 @@
 ---
-- name: Provision all
-  hosts: all
-  become: yes
-  tasks:
-  - name: Update apt's repository indices
-    apt:
-      cache_valid_time: 3600  # ..seconds = 1 hour
-    when: ansible_distribution in ['Ubuntu', 'Debian']
-
-- name: Yet another provisioning example
+- name: Perform full upgrade
   hosts: my-ubuntu
   gather_facts: no
+  become: yes
   tasks:
-  - name: Greet
-    debug: msg="Hello, World!"
+  - name: Do upgrade
+    apt:
+      update_cache: yes
+      upgrade: dist
+    register: upgrade
+  # https://github.com/ansible/ansible/issues/26521#issuecomment-371142617
+  - name: Remove nondownloadable packages from cache
+    apt:
+      autoclean: yes
+    when: upgrade is succeeded
+  - name: Remove and purge orphaned packages
+    apt:
+      autoremove: yes
+      purge: yes
+    when: upgrade is succeeded
+
+- name: Figure out which snaps are installed
+  hosts: my-ubuntu
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Install Snap, if missing
+    apt: name=snap
+  - name: Read list
+    command: snap list
+    register: snaps
+
+- name: Install gedit
+  hosts: my-ubuntu
+  gather_facts: no
+  become: yes
+  tasks:
+  - command: snap install gedit
+    when: "'gedit' not in snaps.stdout"
