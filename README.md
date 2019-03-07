@@ -9,12 +9,12 @@ How to get going:
 1. Have all the [dependencies][intro-1] installed.
 1. `vagrant up`.
 
-By default, only one [Ubuntu Budgie 18][intro-2] VM is defined. But, many
-machines using any number of configuration profiles (Vagrant box, static IP, et
-cetera..) may easily be set up thru editing configuration values at the top in
-the provided `Vagrantfile`. Furthermore, Ansible plumbing has been added to
-facilitate machine provisioning. All of this is described in subsequent
-sections.
+By default, only one minimal install of [Ubuntu Budgie 18][intro-2] VM is
+defined. But, many machines using any number of configuration profiles (Vagrant
+box, static IP, et cetera..) may easily be set up thru editing configuration
+values at the top in the provided `Vagrantfile`. Furthermore, Ansible plumbing
+has been added to facilitate machine provisioning. All of this is described in
+subsequent sections.
 
 This project was conceived by a Windows-addicted developer who got tired of
 hacking together new Vagrantfiles for each unique software project. I like to
@@ -238,9 +238,13 @@ installed.
 
 Write Ansible plays in `provisioning/playbook.yml`.
 
-Valid Ansible [host patterns][ans-1] that can be used to target machines
-include - but are not limited to - [machine names][ans-2], [IP][ans-3] and
-[Ansible group][ans-4].
+The [provided playbook][ans-1] will upgrade the system and install a text editor
+(gedit). Feel free to replace this guy or extend him by throwing in whatever
+packages and apps you need for your environment.
+
+Valid Ansible [host patterns][ans-2] that can be used to target machines
+include - but are not limited to - [machine names][ans-3], [IP][ans-4] and
+[Ansible group][ans-5].
 
 Ansible roles can be automagically installed on the controller by putting them
 in `provisioning/requirements.yml`.
@@ -252,10 +256,11 @@ the playbook a second time, do this:
 
     vagrant provision --provision-with ansible
 
-[ans-1]: http://docs.ansible.com/ansible/latest/intro_patterns.html#patterns
-[ans-2]: #machines
-[ans-3]: #first_ip
-[ans-4]: #ansible_group
+[ans-1]: https://github.com/martinanderssondotcom/dev-mini/blob/master/provisioning/playbook.yml
+[ans-2]: http://docs.ansible.com/ansible/latest/intro_patterns.html#patterns
+[ans-3]: #machines
+[ans-4]: #first_ip
+[ans-5]: #ansible_group
 
 ## Change log
 
