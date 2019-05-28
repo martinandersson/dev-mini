@@ -10,6 +10,17 @@ and this project **tries to** adhere to
 
 - Nothing, yet!
 
+## [2.2.3] - 2019-05-28
+
+### Changed
+
+- Primary box from [`pristine/ubuntu-budgie-18-x64`][2.2.3-1] to
+  [`pristine/ubuntu-budgie-19.04`][2.2.3-2].
+- Ansible from version `2.7.8` to version `2.8.0`.
+
+[2.2.3-1]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-18-x64
+[2.2.3-2]: https://app.vagrantup.com/pristine/boxes/ubuntu-budgie-19.04
+
 ## [2.2.2] - 2019-03-07
 
 ### Changed
@@ -139,7 +150,8 @@ Initial release.
 - `provisioning/box-failures.md`
 - `provisioning/unattended-upgrades.md`
 
-[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.2.2...HEAD
+[Unreleased]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.2.3...HEAD
+[2.2.3]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/martinanderssondotcom/dev-mini/compare/v2.1.0...v2.2.0
