@@ -163,8 +163,7 @@ something on this, please give me a holla.
 
 ### `cpus`
 
-Defines the number of virtual CPUs for the VM and is currently only applied for
-the VirtualBox provider.
+Defines the number of virtual CPUs for the VM.
 
 By default, the value will be the number of _available_ processors on the host
 machine (including _logical_ cores).
